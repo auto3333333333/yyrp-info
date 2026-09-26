@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>YYRP VEHICLES — 車両カタログ（閲覧専用）</title>
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -297,7 +297,7 @@
 <header class="board">
   <div class="brand-row">
     <div class="brand-icon">
-      <img src="/logo.png" alt="YYRP">
+      <img src="logo.png" alt="YYRP">
     </div>
     <div>
       <p class="board-title">Vehicle Catalog</p>
@@ -417,7 +417,7 @@
   function getImageCandidates(model){
     const m = (model || '').trim().toLowerCase();
     const remote = `https://docs.fivem.net/vehicles/${encodeURIComponent(m)}.webp`;
-    const local = LOCAL_IMAGE_EXTS.map(ext => `/assets/${encodeURIComponent(m)}.${ext}`);
+    const local = LOCAL_IMAGE_EXTS.map(ext => `assets/${encodeURIComponent(m)}.${ext}`);
     return [remote, ...local];
   }
   // <img>要素に候補を順番に試させ、全滅したら onAllFailed を呼ぶ
