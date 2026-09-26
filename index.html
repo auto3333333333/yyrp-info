@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>YYRP情報局</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f5f1;
+    --panel: #ffffff;
+    --ink: #22221f;
+    --sub: #6b6a63;
+    --line: #e3e1d8;
+    --accent: #b5472c;
+    --disabled: #cfcdc4;
+
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17181a;
+      --panel: #202225;
+      --ink: #ece9e2;
+      --sub: #a2a099;
+      --line: #33352f;
+      --disabled: #3a3c37;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17181a;
+    --panel: #202225;
+    --ink: #ece9e2;
+    --sub: #a2a099;
+    --line: #33352f;
+    --disabled: #3a3c37;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  h1.title { font-size: clamp(28px, 4vw, 40px); font-weight: 900; margin: 0 0 8px; }
+  p.sub { color: var(--sub); font-size: 15px; margin: 0 0 28px; }
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 16px;
+  }
+  .search-box svg { flex: none; color: var(--sub); }
+  .search-box input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 15px;
+  }
+  .search-box input::placeholder { color: var(--sub); }
+
+  section.block { margin-top: 44px; }
+  h2.block-title { font-size: 18px; font-weight: 700; margin: 0 0 14px; }
+
+  .subgroup { margin-top: 20px; }
+  .subgroup:first-of-type { margin-top: 0; }
+  h3.sub-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 10px;
+    font-family: "JetBrains Mono", monospace;
+  }
+  p.tbd-note {
+    color: var(--sub);
+    font-size: 13.5px;
+    background: var(--panel);
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 0;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  a.card, div.card {
+    display: block;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: border-color .15s ease;
+  }
+  a.card:hover { border-color: var(--accent); }
+  .card .name { font-weight: 700; font-size: 15px; }
+  .card .status {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    color: var(--accent);
+  }
+  div.card.disabled {
+    cursor: default;
+    color: var(--sub);
+    border-style: dashed;
+  }
+  div.card.disabled .status { color: var(--disabled); }
+  div.card.disabled .name { color: var(--sub); }
+
+  .card.hidden { display: none; }
+
+  footer.page-foot {
+    margin-top: 64px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    color: var(--sub);
+    font-size: 12.5px;
+  }
+
+  #empty-msg {
+    display: none;
+    color: var(--sub);
+    font-size: 14px;
+    padding: 20px 0;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1 class="title">YYRP情報局</h1>
+    <p class="sub">車両・クラフト・犯罪の情報をここから検索できます。</p>
+    <div class="search-box">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="search" type="text" placeholder="ページ名で検索（例：ウィード、車両）" autocomplete="off">
+    </div>
+  </header>
+
+  <section class="block">
+    <h2 class="block-title">車両</h2>
+    <div class="grid" data-group="vehicle">
+      <a class="card" data-name="車両" href="vehicles/index.html">
+        <div class="name">車両一覧</div>
+        <div class="status">車両リストを見る →</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2 class="block-title">クラフト</h2>
+    <div class="grid" data-group="craft">
+      <a class="card" data-name="クラフト" href="craft.html">
+        <div class="name">クラフト早見表</div>
+        <div class="status">資材・レシピ一覧 →</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2 class="block-title">犯罪</h2>
+
+    <div class="subgroup">
+      <h3 class="sub-title">小型</h3>
+      <div class="grid" data-group="crime">
+        <a class="card" data-name="フリーカ" href="freeca.html">
+          <div class="name">フリーカ強盗</div>
+          <div class="status">必要素材・手順 →</div>
+        </a>
+        <div class="card disabled" data-name="コンビニ"><div class="name">コンビニ</div><div class="status">準備中</div></div>
+        <div class="card disabled" data-name="ウィード"><div class="name">ウィード</div><div class="status">準備中</div></div>
+        <div class="card disabled" data-name="ATM"><div class="name">ATM</div><div class="status">準備中</div></div>
+      </div>
+    </div>
+
+    <div class="subgroup">
+      <h3 class="sub-title">中型</h3>
+      <div class="grid" data-group="crime">
+        <div class="card disabled" data-name="宝石"><div class="name">宝石</div><div class="status">準備中</div></div>
+        <a class="card" data-name="ボブキャット" href="bobcat.html">
+          <div class="name">ボブキャット</div>
+          <div class="status">必要素材 →</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="subgroup">
+      <h3 class="sub-title">大型</h3>
+      <div class="grid" data-group="crime">
+        <div class="card disabled" data-name="客船"><div class="name">客船</div><div class="status">準備中</div></div>
+        <div class="card disabled" data-name="ユニオン"><div class="name">ユニオン</div><div class="status">準備中</div></div>
+      </div>
+    </div>
+
+    <p id="empty-msg">一致するページが見つかりませんでした。</p>
+  </section>
+
+  <footer class="page-foot">「準備中」のページは順次追加予定です。</footer>
+
+</div>
+
+<script>
+  const input = document.getElementById('search');
+  const cards = Array.from(document.querySelectorAll('.card'));
+  const sections = Array.from(document.querySelectorAll('section.block'));
+  const subgroups = Array.from(document.querySelectorAll('.subgroup'));
+  const emptyMsg = document.getElementById('empty-msg');
+
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    let anyVisible = false;
+
+    cards.forEach(card => {
+      const name = (card.dataset.name || '').toLowerCase();
+      const match = q === '' || name.includes(q);
+      card.classList.toggle('hidden', !match);
+      if (match) anyVisible = true;
+    });
+
+    subgroups.forEach(sg => {
+      const sgCards = Array.from(sg.querySelectorAll('.card'));
+      if (sgCards.length === 0) {
+        // subgroup with only a placeholder note (e.g. 大型) — always show when not searching
+        sg.style.display = (q === '') ? '' : 'none';
+        return;
+      }
+      const visible = sgCards.some(c => !c.classList.contains('hidden'));
+      sg.style.display = (q === '' || visible) ? '' : 'none';
+    });
+
+    sections.forEach(sec => {
+      const grids = Array.from(sec.querySelectorAll('.grid'));
+      if (grids.length === 0) return;
+      const visibleInSection = grids.some(grid =>
+        Array.from(grid.querySelectorAll('.card')).some(c => !c.classList.contains('hidden'))
+      );
+      sec.style.display = (q === '' || visibleInSection) ? '' : 'none';
+    });
+
+    emptyMsg.style.display = (q !== '' && !anyVisible) ? '' : 'none';
+  });
+</script>
+</body>
+</html>

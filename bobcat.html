@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ボブキャット | YYRP情報局</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f5f1;
+    --panel: #ffffff;
+    --ink: #22221f;
+    --sub: #6b6a63;
+    --line: #e3e1d8;
+    --accent: #b5472c;
+
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17181a; --panel: #202225; --ink: #ece9e2; --sub: #a2a099; --line: #33352f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17181a; --panel: #202225; --ink: #ece9e2; --sub: #a2a099; --line: #33352f;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  a.back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--sub);
+    text-decoration: none;
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+  a.back:hover { color: var(--accent); }
+
+  h1.title { font-size: clamp(26px, 4vw, 36px); font-weight: 900; margin: 0 0 6px; }
+  p.sub { color: var(--sub); font-size: 14px; margin: 0 0 32px; }
+
+  section.block { margin-top: 36px; }
+  h2.block-title { font-size: 17px; font-weight: 700; margin: 0 0 14px; }
+
+  ul.items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  ul.items li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 14.5px;
+  }
+  ul.items .qty {
+    font-family: "JetBrains Mono", monospace;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  p.tbd {
+    color: var(--sub);
+    font-size: 14px;
+    background: var(--panel);
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 0;
+  }
+
+  footer.page-foot {
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    color: var(--sub);
+    font-size: 12.5px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back" href="index.html">← HOMEに戻る</a>
+
+  <h1 class="title">ボブキャット</h1>
+  <p class="sub">犯罪 / 強盗</p>
+
+  <section class="block">
+    <h2 class="block-title">必要なもの</h2>
+    <ul class="items">
+      <li><span>強盗用バッグ</span><span class="qty">×1</span></li>
+      <li><span>ハックUSB</span><span class="qty">×1</span></li>
+      <li><span>サーマイト</span><span class="qty">×3</span></li>
+      <li><span>C4</span><span class="qty">×1</span></li>
+      <li><span>バール</span><span class="qty">×1</span></li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <h2 class="block-title">やり方</h2>
+    <p class="tbd">準備中（手順が届き次第追加します）</p>
+  </section>
+
+  <footer class="page-foot">YYRP情報局 — 犯罪ページ</footer>
+
+</div>
+</body>
+</html>

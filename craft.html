@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>資材・クラフト早見表</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f5f1;
+    --panel: #ffffff;
+    --ink: #22221f;
+    --sub: #6b6a63;
+    --line: #e3e1d8;
+    --accent: #b5472c;
+
+    --c-metal: #7f9b98;   /* メタルスクラップ */
+    --c-plastic: #a9c6bd; /* プラスチック */
+    --c-steel: #f4d99a;   /* スチール */
+    --c-iron: #a9c3e8;    /* 鉄 */
+    --c-copper: #d99a8d;  /* 銅 */
+    --c-cloth: #e3c8dd;   /* 布 */
+    --c-fiber: #c3d9b3;   /* 化学繊維 */
+    --c-leather: #b9cfc9; /* 合皮 */
+    --c-alum: #dfbc55;    /* アルミ */
+    --c-rubber: #f0b8cf;  /* ゴム */
+
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17181a;
+      --panel: #202225;
+      --ink: #ece9e2;
+      --sub: #a2a099;
+      --line: #33352f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17181a;
+    --panel: #202225;
+    --ink: #ece9e2;
+    --sub: #a2a099;
+    --line: #33352f;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  header.page-head {
+    margin-bottom: 40px;
+  }
+  a.back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--sub);
+    text-decoration: none;
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+  a.back:hover { color: var(--accent); }
+  .eyebrow-free-title {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 900;
+    margin: 0 0 8px;
+    letter-spacing: .01em;
+  }
+  .page-sub {
+    color: var(--sub);
+    font-size: 15px;
+    margin: 0;
+  }
+
+  section.block { margin-top: 56px; }
+  h2.block-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 4px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  h2.block-title .tag {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    padding: 2px 7px;
+  }
+  p.block-note {
+    color: var(--sub);
+    font-size: 13.5px;
+    margin: 0 0 16px;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 560px;
+    font-size: 14px;
+  }
+  table.materials { min-width: 320px; }
+
+  th, td {
+    padding: 10px 14px;
+    text-align: right;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--line);
+  }
+  th:first-child, td:first-child {
+    text-align: left;
+    position: sticky;
+    left: 0;
+    background: var(--panel);
+    font-weight: 500;
+    border-right: 1px solid var(--line);
+  }
+  thead th {
+    font-weight: 700;
+    font-size: 12.5px;
+    color: var(--ink);
+    border-bottom: 2px solid var(--line);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  td.qty { font-family: "JetBrains Mono", monospace; font-variant-numeric: tabular-nums; }
+  td.dash { color: var(--sub); opacity: .35; }
+
+  /* material column tints, applied to header + body cells via nth-of-type per table via data-col classes */
+  .col-metal   { background: color-mix(in srgb, var(--c-metal) 32%, var(--panel)); }
+  .col-plastic { background: color-mix(in srgb, var(--c-plastic) 32%, var(--panel)); }
+  .col-steel   { background: color-mix(in srgb, var(--c-steel) 40%, var(--panel)); }
+  .col-iron    { background: color-mix(in srgb, var(--c-iron) 34%, var(--panel)); }
+  .col-copper  { background: color-mix(in srgb, var(--c-copper) 34%, var(--panel)); }
+  .col-cloth   { background: color-mix(in srgb, var(--c-cloth) 34%, var(--panel)); }
+  .col-fiber   { background: color-mix(in srgb, var(--c-fiber) 36%, var(--panel)); }
+  .col-leather { background: color-mix(in srgb, var(--c-leather) 32%, var(--panel)); }
+  .col-alum    { background: color-mix(in srgb, var(--c-alum) 40%, var(--panel)); }
+  .col-rubber  { background: color-mix(in srgb, var(--c-rubber) 34%, var(--panel)); }
+
+  thead .col-metal, thead .col-plastic, thead .col-steel, thead .col-iron,
+  thead .col-copper, thead .col-cloth, thead .col-fiber, thead .col-leather,
+  thead .col-alum, thead .col-rubber { font-weight: 700; }
+
+  .price-table td:nth-child(2) { font-family: "JetBrains Mono", monospace; }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    margin: 18px 0 0;
+    font-size: 12.5px;
+    color: var(--sub);
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .swatch { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+
+  footer.page-foot {
+    margin-top: 64px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    color: var(--sub);
+    font-size: 12.5px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page-head">
+    <a class="back" href="index.html">← HOMEに戻る</a>
+    <h1 class="eyebrow-free-title">資材・クラフト早見表</h1>
+    <p class="page-sub">リセン素材値段と、武器クラフト・犯罪道具の必要素材をまとめた一覧です。</p>
+  </header>
+
+  <section class="block">
+    <h2 class="block-title">素材値段</h2>
+    <p class="block-note">リセンでの素材の基準価格</p>
+    <div class="table-scroll">
+      <table class="materials price-table">
+        <thead>
+          <tr><th>素材名</th><th>値段</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>アルミ</td><td>7,000</td></tr>
+          <tr><td>布</td><td>8,000</td></tr>
+          <tr><td>銅</td><td>7,000</td></tr>
+          <tr><td>ガラス</td><td>9,000</td></tr>
+          <tr><td>鉄</td><td>4,000</td></tr>
+          <tr><td>メタスプ</td><td>3,000</td></tr>
+          <tr><td>プラ</td><td>10,000</td></tr>
+          <tr><td>ゴム</td><td>11,000</td></tr>
+          <tr><td>スチール</td><td>12,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2 class="block-title">武器クラフト<span class="tag">普通</span></h2>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>名前</th>
+            <th class="col-metal">メタルスクラップ</th>
+            <th class="col-plastic">プラスチック</th>
+            <th class="col-steel">スチール</th>
+            <th class="col-iron">鉄</th>
+            <th class="col-copper">銅</th>
+            <th class="col-cloth">布</th>
+            <th class="col-fiber">化学繊維</th>
+            <th class="col-leather">合皮</th>
+            <th class="col-alum">アルミ</th>
+            <th class="col-rubber">ゴム</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Bullpup Rifle</td><td class="col-metal qty">300</td><td class="col-plastic qty">80</td><td class="col-steel qty">80</td><td class="col-iron dash">—</td><td class="col-copper dash">—</td><td class="col-cloth dash">—</td><td class="col-fiber dash">—</td><td class="col-leather dash">—</td><td class="col-alum dash">—</td><td class="col-rubber dash">—</td></tr>
+          <tr><td>Assault Rifle</td><td class="col-metal qty">200</td><td class="col-plastic qty">40</td><td class="col-steel qty">50</td><td class="col-iron dash">—</td><td class="col-copper dash">—</td><td class="col-cloth dash">—</td><td class="col-fiber dash">—</td><td class="col-leather dash">—</td><td class="col-alum dash">—</td><td class="col-rubber dash">—</td></tr>
+          <tr><td>Pistol</td><td class="col-metal dash">—</td><td class="col-plastic qty">10</td><td class="col-steel qty">30</td><td class="col-iron qty">50</td><td class="col-copper dash">—</td><td class="col-cloth dash">—</td><td class="col-fiber dash">—</td><td class="col-leather dash">—</td><td class="col-alum dash">—</td><td class="col-rubber dash">—</td></tr>
+          <tr><td>Tactical SMG</td><td class="col-metal dash">—</td><td class="col-plastic qty">40</td><td class="col-steel qty">40</td><td class="col-iron dash">—</td><td class="col-copper dash">—</td><td class="col-cloth dash">—</td><td class="col-fiber dash">—</td><td class="col-leather dash">—</td><td class="col-alum qty">140</td><td class="col-rubber dash">—</td></tr>
+          <tr><td>Armor</td><td class="col-metal dash">—</td><td class="col-plastic dash">—</td><td class="col-steel dash">—</td><td class="col-iron qty">15</td><td class="col-copper dash">—</td><td class="col-cloth qty">6</td><td class="col-fiber dash">—</td><td class="col-leather dash">—</td><td class="col-alum dash">—</td><td class="col-rubber dash">—</td></tr>
+          <tr><td>5.56x45</td><td class="col-metal qty">1</td><td class="col-plastic dash">—</td><td class="col-steel dash">—</td><td class="col-iron qty">2</td><td class="col-copper dash">—</td><td class="col-cloth dash">—</td><td class="col-fiber dash">—</td><td class="col-leather dash">—</td><td class="col-alum dash">—</td><td class="col-rubber dash">—</td></tr>
+          <tr><td>7.62x39</td><td class="col-metal qty">1</td><td class="col-plastic dash">—</td><td class="col-steel dash">—</td><td class="col-iron qty">2</td><td class="col-copper dash">—</td><td class="col-cloth dash">—</td><td class="col-fiber dash">—</td><td class="col-leather dash">—</td><td class="col-alum dash">—</td><td class="col-rubber dash">—</td></tr>
+          <tr><td>9mm</td><td class="col-metal qty">1</td><td class="col-plastic dash">—</td><td class="col-steel dash">—</td><td class="col-iron qty">2</td><td class="col-copper dash">—</td><td class="col-cloth dash">—</td><td class="col-fiber dash">—</td><td class="col-leather dash">—</td><td class="col-alum dash">—</td><td class="col-rubber dash">—</td></tr>
+          <tr><td>化学繊維</td><td class="col-metal dash">—</td><td class="col-plastic qty">5</td><td class="col-steel dash">—</td><td class="col-iron dash">—</td><td class="col-copper dash">—</td><td class="col-cloth qty">5</td><td class="col-fiber dash">—</td><td class="col-leather dash">—</td><td class="col-alum dash">—</td><td class="col-rubber dash">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2 class="block-title">武器クラフト<span class="tag">上級</span></h2>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>名前</th>
+            <th class="col-metal">メタルスクラップ</th>
+            <th class="col-plastic">プラスチック</th>
+            <th class="col-steel">スチール</th>
+            <th class="col-iron">鉄</th>
+            <th class="col-copper">銅</th>
+            <th class="col-cloth">布</th>
+            <th class="col-fiber">化学繊維</th>
+            <th class="col-leather">合皮</th>
+            <th class="col-alum">アルミ</th>
+            <th class="col-rubber">ゴム</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Bullpup Rifle</td><td class="col-metal qty">180</td><td class="col-plastic qty">50</td><td class="col-steel qty">50</td><td class="col-iron dash">—</td><td class="col-copper dash">—</td><td class="col-cloth dash">—</td><td class="col-fiber dash">—</td><td class="col-leather dash">—</td><td class="col-alum dash">—</td><td class="col-rubber dash">—</td></tr>
+          <tr><td>Assault Rifle</td><td class="col-metal qty">120</td><td class="col-plastic qty">16</td><td class="col-steel qty">30</td><td class="col-iron dash">—</td><td class="col-copper dash">—</td><td class="col-cloth dash">—</td><td class="col-fiber dash">—</td><td class="col-leather dash">—</td><td class="col-alum dash">—</td><td class="col-rubber dash">—</td></tr>
+          <tr><td>special carbine</td><td class="col-metal qty">300</td><td class="col-plastic qty">100</td><td class="col-steel qty">100</td><td class="col-iron dash">—</td><td class="col-copper dash">—</td><td class="col-cloth dash">—</td><td class="col-fiber dash">—</td><td class="col-leather dash">—</td><td class="col-alum dash">—</td><td class="col-rubber dash">—</td></tr>
+          <tr><td>Pistol</td><td class="col-metal dash">—</td><td class="col-plastic qty">5</td><td class="col-steel qty">10</td><td class="col-iron qty">20</td><td class="col-copper dash">—</td><td class="col-cloth dash">—</td><td class="col-fiber dash">—</td><td class="col-leather dash">—</td><td class="col-alum dash">—</td><td class="col-rubber dash">—</td></tr>
+          <tr><td>Tactical SMG</td><td class="col-metal dash">—</td><td class="col-plastic qty">30</td><td class="col-steel qty">30</td><td class="col-iron dash">—</td><td class="col-copper dash">—</td><td class="col-cloth dash">—</td><td class="col-fiber dash">—</td><td class="col-leather dash">—</td><td class="col-alum qty">30</td><td class="col-rubber dash">—</td></tr>
+          <tr><td>Armor</td><td class="col-metal dash">—</td><td class="col-plastic dash">—</td><td class="col-steel qty">10</td><td class="col-iron dash">—</td><td class="col-copper dash">—</td><td class="col-cloth dash">—</td><td class="col-fiber dash">—</td><td class="col-leather dash">—</td><td class="col-alum dash">—</td><td class="col-rubber dash">—</td></tr>
+          <tr><td>ヘビーアーマー</td><td class="col-metal dash">—</td><td class="col-plastic dash">—</td><td class="col-steel dash">—</td><td class="col-iron qty">30</td><td class="col-copper qty">30</td><td class="col-cloth dash">—</td><td class="col-fiber dash">—</td><td class="col-leather qty">30</td><td class="col-alum dash">—</td><td class="col-rubber dash">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2 class="block-title">犯罪道具</h2>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>名前</th>
+            <th class="col-metal">メタルスクラップ</th>
+            <th class="col-plastic">プラスチック</th>
+            <th class="col-steel">スチール</th>
+            <th class="col-iron">鉄</th>
+            <th class="col-copper">銅</th>
+            <th class="col-cloth">布</th>
+            <th class="col-fiber">化学繊維</th>
+            <th class="col-leather">合皮</th>
+            <th class="col-alum">アルミ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Big Drill</td><td class="col-metal qty">12</td><td class="col-plastic dash">—</td><td class="col-steel dash">—</td><td class="col-iron qty">10</td><td class="col-copper dash">—</td><td class="col-cloth dash">—</td><td class="col-fiber dash">—</td><td class="col-leather dash">—</td><td class="col-alum dash">—</td></tr>
+          <tr><td>Drill</td><td class="col-metal qty">5</td><td class="col-plastic dash">—</td><td class="col-steel dash">—</td><td class="col-iron qty">7</td><td class="col-copper dash">—</td><td class="col-cloth dash">—</td><td class="col-fiber dash">—</td><td class="col-leather dash">—</td><td class="col-alum dash">—</td></tr>
+          <tr><td>C4 Bomb</td><td class="col-metal qty">5</td><td class="col-plastic dash">—</td><td class="col-steel dash">—</td><td class="col-iron qty">5</td><td class="col-copper dash">—</td><td class="col-cloth dash">—</td><td class="col-fiber dash">—</td><td class="col-leather dash">—</td><td class="col-alum dash">—</td></tr>
+          <tr><td>Hack USB</td><td class="col-metal dash">—</td><td class="col-plastic dash">—</td><td class="col-steel qty">3</td><td class="col-iron dash">—</td><td class="col-copper qty">3</td><td class="col-cloth dash">—</td><td class="col-fiber dash">—</td><td class="col-leather dash">—</td><td class="col-alum dash">—</td></tr>
+          <tr><td>Thermite</td><td class="col-metal dash">—</td><td class="col-plastic qty">5</td><td class="col-steel qty">5</td><td class="col-iron qty">5</td><td class="col-copper dash">—</td><td class="col-cloth dash">—</td><td class="col-fiber dash">—</td><td class="col-leather dash">—</td><td class="col-alum dash">—</td></tr>
+          <tr><td>犯罪用バッグ</td><td class="col-metal dash">—</td><td class="col-plastic dash">—</td><td class="col-steel dash">—</td><td class="col-iron dash">—</td><td class="col-copper dash">—</td><td class="col-cloth qty">5</td><td class="col-fiber dash">—</td><td class="col-leather qty">5</td><td class="col-alum dash">—</td></tr>
+          <tr><td>ロックピック</td><td class="col-metal dash">—</td><td class="col-plastic qty">3</td><td class="col-steel dash">—</td><td class="col-iron qty">3</td><td class="col-copper dash">—</td><td class="col-cloth dash">—</td><td class="col-fiber dash">—</td><td class="col-leather dash">—</td><td class="col-alum dash">—</td></tr>
+          <tr><td>ロープ</td><td class="col-metal dash">—</td><td class="col-plastic dash">—</td><td class="col-steel dash">—</td><td class="col-iron dash">—</td><td class="col-copper dash">—</td><td class="col-cloth qty">10</td><td class="col-fiber dash">—</td><td class="col-leather dash">—</td><td class="col-alum dash">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="legend">
+      <span><span class="swatch" style="background:var(--c-metal)"></span>メタルスクラップ</span>
+      <span><span class="swatch" style="background:var(--c-plastic)"></span>プラスチック</span>
+      <span><span class="swatch" style="background:var(--c-steel)"></span>スチール</span>
+      <span><span class="swatch" style="background:var(--c-iron)"></span>鉄</span>
+      <span><span class="swatch" style="background:var(--c-copper)"></span>銅</span>
+      <span><span class="swatch" style="background:var(--c-cloth)"></span>布</span>
+      <span><span class="swatch" style="background:var(--c-fiber)"></span>化学繊維</span>
+      <span><span class="swatch" style="background:var(--c-leather)"></span>合皮</span>
+      <span><span class="swatch" style="background:var(--c-alum)"></span>アルミ</span>
+      <span><span class="swatch" style="background:var(--c-rubber)"></span>ゴム</span>
+    </div>
+  </section>
+
+  <footer class="page-foot">
+    元データ: リセン 素材値段表 / 武器クラフト表(普通・上級) / 犯罪道具表
+  </footer>
+
+</div>
+</body>
+</html>
