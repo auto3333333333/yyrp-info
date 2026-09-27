@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>獺祭 DASSAI ギャングINFO | YYRP情報局</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f5f1; --panel: #ffffff; --ink: #22221f; --sub: #6b6a63; --line: #e3e1d8; --accent: #b5472c;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg: #17181a; --panel: #202225; --ink: #ece9e2; --sub: #a2a099; --line: #33352f; }
+  }
+  :root[data-theme="dark"] { --bg: #17181a; --panel: #202225; --ink: #ece9e2; --sub: #a2a099; --line: #33352f; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",system-ui,sans-serif; line-height: 1.6; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+  a.back { display: inline-flex; align-items: center; gap: 6px; color: var(--sub); text-decoration: none; font-size: 13px; margin-bottom: 20px; }
+  a.back:hover { color: var(--accent); }
+  h1.title { font-size: clamp(26px, 4vw, 36px); font-weight: 900; margin: 0 0 6px; }
+  p.sub { color: var(--sub); font-size: 14px; margin: 0 0 32px; }
+  section.block { margin-top: 36px; }
+  h2.block-title { font-size: 17px; font-weight: 700; margin: 0 0 14px; }
+  table.info-table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; font-size: 14px; }
+  table.info-table td { padding: 12px 16px; border-bottom: 1px solid var(--line); }
+  table.info-table tr:last-child td { border-bottom: none; }
+  table.info-table td:first-child { width: 40%; font-weight: 700; color: var(--sub); }
+  .code { font-family: "JetBrains Mono", monospace; font-size: 13px; color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--panel)); padding: 2px 7px; border-radius: 4px; }
+  footer.page-foot { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--sub); font-size: 12.5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back" href="index.html">← HOMEに戻る</a>
+
+  <h1 class="title">獺祭 DASSAI — ギャングINFO</h1>
+  <p class="sub">衣装番号・車両カラー・無線周波数・受注場所</p>
+
+  <section class="block">
+    <h2 class="block-title">👕 衣装番号（Clothing ID）</h2>
+    <table class="info-table">
+      <tr><td>ギャング服（男性）</td><td>トップス <span class="code">#911</span>（テクスチャ<span class="code">2</span>） / インナー <span class="code">#8</span>（テクスチャ<span class="code">13</span>） / パンツ <span class="code">#55</span>（テクスチャ<span class="code">0</span>）</td></tr>
+      <tr><td>ギャング服（女性）</td><td>トップス <span class="code">#1503</span> / パンツ <span class="code">#158</span></td></tr>
+      <tr><td>傭兵服（男性）</td><td>トップス <span class="code">#374</span>（テクスチャ<span class="code">0</span>） / インナー <span class="code">#15</span>（テクスチャ<span class="code">0</span>） / パンツ <span class="code">#170</span>（テクスチャ<span class="code">0</span>）</td></tr>
+      <tr><td>傭兵服（女性）</td><td>トップス <span class="code">#1640</span>（テクスチャ<span class="code">13</span>） / インナー <span class="code">#831</span>（テクスチャ<span class="code">2</span>） / パンツ <span class="code">#158</span></td></tr>
+    </table>
+  </section>
+
+  <section class="block">
+    <h2 class="block-title">🚗 車両カラー・カスタム</h2>
+    <table class="info-table">
+      <tr><td>メインカラー</td><td>メタリック レーシングブルー</td></tr>
+    </table>
+  </section>
+
+  <section class="block">
+    <h2 class="block-title">📻 無線周波数（Radio Frequency）</h2>
+    <table class="info-table">
+      <tr><td>メイン周波数</td><td><span class="code">222.0 MHz</span></td></tr>
+      <tr><td>傭兵用周波数</td><td><span class="code">14.0 MHz</span></td></tr>
+    </table>
+  </section>
+
+  <section class="block">
+    <h2 class="block-title">📍 主要スポット（受注場所・クラフト台）</h2>
+    <table class="info-table">
+      <tr><td>受注場所（フリーカ）</td><td><span class="code">未設定</span></td></tr>
+      <tr><td>受注場所（宝石店）</td><td><span class="code">未設定</span></td></tr>
+      <tr><td>受注場所（コンビニ）</td><td><span class="code">未設定</span></td></tr>
+      <tr><td>受注場所（客船）</td><td><span class="code">7158</span></td></tr>
+      <tr><td>受注場所（ボブキャット）</td><td><span class="code">未設定</span></td></tr>
+      <tr><td>クラフト台（武器）</td><td><span class="code">未設定</span></td></tr>
+      <tr><td>クラフト台（犯罪道具）</td><td><span class="code">未設定</span></td></tr>
+      <tr><td>リサイクルセンター</td><td><span class="code">未設定</span></td></tr>
+      <tr><td>換金所</td><td><span class="code">未設定</span></td></tr>
+    </table>
+  </section>
+
+  <footer class="page-foot">YYRP情報局 — ギャングINFO（獺祭 DASSAI 内部情報）</footer>
+
+</div>
+</body>
+</html>

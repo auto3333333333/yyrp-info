@@ -9,104 +9,43 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f6f5f1;
-    --panel: #ffffff;
-    --ink: #22221f;
-    --sub: #6b6a63;
-    --line: #e3e1d8;
-    --accent: #b5472c;
-
+    --bg: #f6f5f1; --panel: #ffffff; --ink: #22221f; --sub: #6b6a63; --line: #e3e1d8; --accent: #b5472c;
     box-sizing: border-box;
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
   html { scroll-padding-top: env(safe-area-inset-top, 0px); }
-
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #17181a; --panel: #202225; --ink: #ece9e2; --sub: #a2a099; --line: #33352f;
-    }
+    :root:not([data-theme="light"]) { --bg: #17181a; --panel: #202225; --ink: #ece9e2; --sub: #a2a099; --line: #33352f; }
   }
-  :root[data-theme="dark"] {
-    --bg: #17181a; --panel: #202225; --ink: #ece9e2; --sub: #a2a099; --line: #33352f;
-  }
-
+  :root[data-theme="dark"] { --bg: #17181a; --panel: #202225; --ink: #ece9e2; --sub: #a2a099; --line: #33352f; }
   * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
-    line-height: 1.6;
-  }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",system-ui,sans-serif; line-height: 1.6; }
   .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
-
-  a.back {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--sub);
-    text-decoration: none;
-    font-size: 13px;
-    margin-bottom: 20px;
-  }
+  a.back { display: inline-flex; align-items: center; gap: 6px; color: var(--sub); text-decoration: none; font-size: 13px; margin-bottom: 20px; }
   a.back:hover { color: var(--accent); }
-
-  h1.title { font-size: clamp(26px, 4vw, 36px); font-weight: 900; margin: 0 0 6px; }
+  h1.title { font-size: clamp(26px, 4vw, 36px); font-weight: 900; margin: 0 0 6px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .badge { font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 500; color: var(--accent); border: 1px solid currentColor; border-radius: 4px; padding: 2px 8px; white-space:nowrap; }
   p.sub { color: var(--sub); font-size: 14px; margin: 0 0 32px; }
-
   section.block { margin-top: 36px; }
   h2.block-title { font-size: 17px; font-weight: 700; margin: 0 0 14px; }
-
-  ul.items {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  ul.items li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 10px 16px;
-    font-size: 14.5px;
-  }
-  ul.items .qty {
-    font-family: "JetBrains Mono", monospace;
-    color: var(--accent);
-    font-weight: 500;
-  }
-
-  p.tbd {
-    color: var(--sub);
-    font-size: 14px;
-    background: var(--panel);
-    border: 1px dashed var(--line);
-    border-radius: 8px;
-    padding: 14px 16px;
-    margin: 0;
-  }
-
-  footer.page-foot {
-    margin-top: 56px;
-    padding-top: 20px;
-    border-top: 1px solid var(--line);
-    color: var(--sub);
-    font-size: 12.5px;
-  }
+  ul.items { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  ul.items li { display: flex; justify-content: space-between; align-items: center; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 16px; font-size: 14.5px; }
+  ul.items .qty { font-family: "JetBrains Mono", monospace; color: var(--accent); font-weight: 500; }
+  ol.steps { list-style: none; margin: 0; padding: 0; counter-reset: step; display: flex; flex-direction: column; gap: 4px; }
+  ol.steps li { counter-increment: step; position: relative; padding: 14px 16px 14px 52px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; font-size: 14.5px; }
+  ol.steps li::before { content: counter(step); position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-family: "JetBrains Mono", monospace; font-weight: 700; color: var(--accent); font-size: 13px; }
+  ol.steps li .note { display: block; margin-top: 6px; color: var(--sub); font-size: 13px; }
+  a.video-link { display: inline-flex; align-items: center; gap: 8px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 18px; text-decoration: none; color: var(--ink); font-size: 14.5px; font-weight: 500; transition: border-color .15s ease; }
+  a.video-link:hover { border-color: var(--accent); }
+  p.tbd { color: var(--sub); font-size: 14px; background: var(--panel); border: 1px dashed var(--line); border-radius: 8px; padding: 14px 16px; margin: 0; }
+  footer.page-foot { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--sub); font-size: 12.5px; }
 </style>
 </head>
 <body>
 <div class="wrap">
-
   <a class="back" href="index.html">← HOMEに戻る</a>
-
-  <h1 class="title">ボブキャット</h1>
+  <h1 class="title">ボブキャット<span class="badge">必要人数: 5人〜</span></h1>
   <p class="sub">犯罪 / 強盗</p>
 
   <section class="block">
@@ -122,11 +61,27 @@
 
   <section class="block">
     <h2 class="block-title">やり方</h2>
-    <p class="tbd">準備中（手順が届き次第追加します）</p>
+    <ol class="steps">
+      <li>入口から入って一つ目の扉のギミックをする<span class="note">線を合わせたら一つだけ音が鳴るので、それに合わせて解除する</span></li>
+      <li>次の扉も同じように進める</li>
+      <li>次の扉はフリーカと同じギミックを解いて開ける</li>
+      <li>中の心無きを全滅させて大きな金庫を爆破する</li>
+      <li>爆破している間に奥へ移動し、爆破が終わったタイミングで2か所ある木箱を漁る<span class="note">木箱の中身はヘビーアーマー</span></li>
+      <li>金庫の中に入って、真ん中と入ってすぐ右の2か所（計3か所）にある現金を取る</li>
+      <li>入って左にある4か所の木箱から武器と弾を取る</li>
+      <li>あとは自由に警察を殺す</li>
+    </ol>
+  </section>
+
+  <section class="block">
+    <h2 class="block-title">参考動画</h2>
+    <a class="video-link" href="https://www.youtube.com/watch?v=Vy7QAsg-yw0" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      参考動画を見る
+    </a>
   </section>
 
   <footer class="page-foot">YYRP情報局 — 犯罪ページ</footer>
-
 </div>
 </body>
 </html>
